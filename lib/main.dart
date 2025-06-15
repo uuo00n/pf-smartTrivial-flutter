@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:modules_c/devPage.dart';
+import 'package:modules_c/homePage.dart';
 import 'package:modules_c/login.dart';
 
 void main() {
@@ -32,38 +34,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var _pageList = [homePage(),DevPage(),DevPage(),DevPage()];
+  int _pageIndex = 0;
 
-  void _incrementCounter() {
+  void _selectPageIndex(index) {
     setState(() {
-      _counter++;
+      _pageIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(""),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      body: _pageList[_pageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "首页"),
+          BottomNavigationBarItem(icon: Icon(Icons.article), label: "文章"),
+          BottomNavigationBarItem(icon: Icon(Icons.collections), label: "收藏"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervised_user_circle), label: "我的"),
+        ],
+        onTap: _selectPageIndex,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _pageIndex,
       ),
     );
   }
