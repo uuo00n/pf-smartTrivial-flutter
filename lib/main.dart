@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modules_c/devPage.dart';
 import 'package:modules_c/homePage.dart';
 import 'package:modules_c/login.dart';
+import 'config.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   var _pageList = [homePage(),DevPage(),DevPage(),DevPage()];
   int _pageIndex = 0;
 
@@ -41,6 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _pageIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(Base_token.toString());
   }
 
   @override

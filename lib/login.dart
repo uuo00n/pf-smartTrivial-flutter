@@ -39,6 +39,7 @@ class _loginPageState extends State<loginPage> {
     var lgreq = await http.post(lg, headers: lgHeader, body: lgbody);
     var lgresp = jsonDecode(utf8.decode(lgreq.bodyBytes));
     if (lgresp['code'] == 200) {
+      Base_token = lgresp['token'];
       Navigator.of(context).pushReplacementNamed('/main');
     } else {
       ScaffoldMessenger.of(context)
