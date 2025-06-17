@@ -165,7 +165,7 @@ class _homePageState extends State<homePage> {
                     child: RichText(
                       text: TextSpan(children: [
                         TextSpan(
-                            text: "|", style: TextStyle(color: Colors.blue)),
+                            text: " | ", style: TextStyle(color: Colors.blue)),
                         TextSpan(
                             text: "热门推荐",
                             style: TextStyle(color: Colors.black)),
