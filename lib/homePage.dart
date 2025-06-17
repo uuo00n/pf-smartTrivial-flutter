@@ -4,6 +4,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:modules_c/homeDetil.dart';
+import 'package:modules_c/searchPage.dart';
 import 'config.dart';
 
 class homePage extends StatefulWidget {
@@ -15,6 +17,7 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   var _search = TextEditingController();
+  var _adPageControl = PageController();
   var _adList = [];
   var _homeList = [];
   List<String> uniqueProvinces = [];
@@ -25,7 +28,6 @@ class _homePageState extends State<homePage> {
   Timer? timer;
   String? selectProv;
   String? selectCity;
-  var _adPageControl = PageController();
 
   Future<void> getAd() async {
     var ad = Uri.parse(Base_url + '/api/adv/list');
@@ -114,7 +116,19 @@ class _homePageState extends State<homePage> {
             hintText: "搜索",
           ),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => searchPage(
+                        initText: _search.text,
+                      ),
+                    ));
+              },
+              icon: Icon(Icons.search))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -165,6 +179,15 @@ class _homePageState extends State<homePage> {
                     itemBuilder: (context, index) {
                       var item = _homeList[index];
                       return ListTile(
+                        onTap: () {
+                          print(item['id']);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    homeDetil(id: item['id'].toString()),
+                              ));
+                        },
                         title: Text(item['title'],
                             overflow: TextOverflow.ellipsis),
                         leading: ClipRRect(
